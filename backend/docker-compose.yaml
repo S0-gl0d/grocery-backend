@@ -1,0 +1,36 @@
+services:
+       authentication:
+             image: authentication-image
+             build:  
+                  context: /authenticationApi/
+             command: sh -c "python manage.py migrate &&
+                             python manage.py runserver 0.0.0.0:8000"
+             ports:
+               - '8010:8000'
+             
+
+       catalog:
+          image: catalog-image
+          build:
+            context: /catalogAPI/
+          
+          command: sh -c "python manage.py migrate &&
+                          python manage.py runserver 0.0.0.0:8000"
+          ports:
+            - '8020:8000'
+
+
+       order:
+           image: order-image
+           build:
+               context: /orderAPI/
+           command: sh -c "python manage.py migrate &&
+                           python manage.py runserver 0.0.0.0:8000"
+           ports:
+             - '8030:8000'
+            
+
+      
+
+
+            
